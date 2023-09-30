@@ -1,2 +1,102 @@
 @import 'core/variables';
 @import 'core/reset';
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: $color_pink;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.finder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+    width: 500px;
+    border: solid 4px white;
+    border-radius: 5%;
+    margin: 150px 150px 100px 150px;
+    padding: 20px;
+    background-color: $color_yellow;
+    
+    &__text {
+        font-size: 30px;
+        color: white;
+    }
+
+    &__input {
+        max-width: 150px;
+    }
+
+    &__btn {
+        background-color: $color_violet;
+        max-width: 100px;
+        border-radius: 40%;
+        padding: 5px 10px;
+        color: white;
+        cursor: pointer;
+        box-shadow: 5px 5px 15px white (0,0,0,0.3);
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 300px;
+    margin: 20px;
+    color: white;
+
+    &__favs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+}
+
+.reset__btn {
+    background-color: $color_violet;
+    border-radius: 40%;
+    padding: 5px 10px;
+    color: white;
+    max-width: 100px;
+}
+
+.search_list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+    list-style-type: none;
+}
+
+.favs_list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+    list-style-type: none;
+}
+
+.show_card {
+    background-color: $color_blue;
+    width: 300px;
+    padding: 25px;
+    text-align: center;
+
+    &--fav {
+        background-color: $color_orange;
+    }
+}

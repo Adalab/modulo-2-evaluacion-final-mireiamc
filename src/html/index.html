@@ -7,7 +7,28 @@
     <link rel="stylesheet" href="./assets/css/main.css" />
   </head>
 
-  <body>
+  <body class="body">
+    <header class="finder">
+      <h1 class="finder__text">Buscador de series</h1>
+      <input type="text" class="finder__input js-finder">
+      <button type="submit" class="finder__btn js-finder-btn">Buscar</button>
+    </header>
+
+    <main class="container">
+      <section class="container__favs">
+        <h2>Series favoritas</h2>
+        <button class="reset__btn">Borrar todo</button>
+        <section class="container__favs__list">
+          <ul class="favs_list">
+          </ul>
+        </section>
+      </section>
+      <section class="container__list">
+        <h2>Aqui estan tus coincidencias:</h2>
+        <ul class="search_list js-search-list">
+        </ul>
+      </section>
+    </main>
     <script src="./assets/js/main.js"></script>
   </body>
 </html>
