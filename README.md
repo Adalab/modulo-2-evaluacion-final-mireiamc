@@ -4,7 +4,7 @@ En este proyecto impremento un buscador de series utilizando HTML, SASS y JavaSc
 
 Aquí tienes el enlace para probarla:
 
-http://beta.adalab.es/modulo-2-evaluacion-final-mireiamc/
+http://beta.adalab.es/modulo-2-evaluacion-final-mireiamc/ 
 
 ## Características
 
