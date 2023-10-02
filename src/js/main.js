@@ -55,12 +55,6 @@ function renderSearchList(searchList) {
     elementContainer.setAttribute('id', item.show.id);
     elementContainer.classList.add('show_card');
 
-    const existingFav = favsList.find((fav) => item.show.id === fav.show.id);
-    //Devuelve undefined cuando no encuentra ningun resultado que coincida.
-    if (existingFav !== undefined) {
-      elementContainer.classList.add('show_card--fav');
-    }  
-
     const imgElement = document.createElement('img');
     if (item.show.image === null) {
       imgElement.setAttribute(
@@ -77,6 +71,13 @@ function renderSearchList(searchList) {
     const textTitleH3 = document.createTextNode(item.show.name);
     h3Title.appendChild(textTitleH3);
     elementContainer.appendChild(h3Title);
+
+    const existingFav = favsList.find((fav) => item.show.id === fav.show.id);
+    //Devuelve undefined cuando no encuentra ningun resultado que coincida.
+    if (existingFav !== undefined) {
+      elementContainer.classList.add('show_card--fav');
+      h3Title.classList.add('show_card--title');
+    }
 
     elementContainer.addEventListener('click', clickFavs);
   }

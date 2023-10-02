@@ -123,10 +123,14 @@
     background-color: $color_orange;
     border: solid 4px white;
     border-radius: 10px;
-    width: 250px;
+    width: 25s0px;
     padding: 25px;
     gap: 15px;
     text-align: center;
+    }
+
+    &--title {
+        color: black;
     }
 }
 
@@ -142,3 +146,5 @@
     cursor: pointer;
     box-shadow: 2px 2px 4px white (0,0,0,0.1);
 }
+
+
