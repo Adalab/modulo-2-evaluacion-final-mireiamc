@@ -1,0 +1,144 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: $color_pink;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.finder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+    width: 500px;
+    border: solid 4px white;
+    border-radius: 10px;
+    margin: 150px 150px 100px 150px;
+    padding: 20px;
+    background-color: $color_yellow;
+    
+    &__text {
+        font-size: 30px;
+        color: white;
+    }
+
+    &__input {
+        max-width: 150px;
+    }
+
+    &__btn {
+        background-color: $color_blue;
+        max-width: 100px;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        padding: 10px 20px;
+        color: white;
+        font-size: 16px;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow: 2px 2px 4px white (0,0,0,0.1);
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    gap: 300px;
+    margin: 20px;
+    padding-bottom: 50px;
+    color: white;
+
+    &__favs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+    &__text {
+        text-align: center;
+    }
+}
+
+.reset__btn {
+    background-color: $color_blue;
+    max-width: 100px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    padding: 10px 10px;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px white (0,0,0,0.1);
+}
+
+.search_list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style-type: none;
+}
+
+.favs_list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style-type: none;
+}
+
+.show_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: $color_violet;
+    border: solid 4px white;
+    border-radius: 10px;
+    width: 250px;
+    padding: 25px;
+    gap: 20px;
+    text-align: center;
+
+    &--fav {
+        background-color: $color_orange;
+    }
+
+    &__fav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color_orange;
+    border: solid 4px white;
+    border-radius: 10px;
+    width: 250px;
+    padding: 25px;
+    gap: 15px;
+    text-align: center;
+    }
+}
+
+.delete-btn {
+    background-color: $color_blue;
+    max-width: 100px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    padding: 5px 8px;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px white (0,0,0,0.1);
+}
