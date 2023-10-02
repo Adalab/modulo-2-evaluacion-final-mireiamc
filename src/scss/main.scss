@@ -34,7 +34,7 @@
     }
 
     &__btn {
-        background-color: $color_violet;
+        background-color: $color_blue;
         max-width: 100px;
         border-radius: 40%;
         padding: 5px 10px;
@@ -46,7 +46,7 @@
 
 .container {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     gap: 300px;
     margin: 20px;
     color: white;
@@ -62,23 +62,27 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         gap: 20px;
+    }
+    &__text {
+        text-align: center;
     }
 }
 
 .reset__btn {
-    background-color: $color_violet;
+    background-color: $color_blue;
     border-radius: 40%;
     padding: 5px 10px;
     color: white;
     max-width: 100px;
+    cursor: pointer;
 }
 
 .search_list {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 50%;
     list-style-type: none;
 }
 
@@ -86,14 +90,17 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 50%;
     list-style-type: none;
 }
 
 .show_card {
-    background-color: $color_blue;
-    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: $color_violet;
+    width: 250px;
     padding: 25px;
+    gap: 20px;
     text-align: center;
 
     &--fav {

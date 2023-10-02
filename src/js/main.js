@@ -31,11 +31,19 @@
 const finderInput = document.querySelector('.js-finder');
 const finderBtn = document.querySelector('.js-finder-btn');
 const searchListUl = document.querySelector('.js-search-list');
+const searchListText = document.querySelector('.js-coincidences_text');
+const resetBtn = document.querySelector('.js-reset-btn');
 
 // Variables
-
 let searchList = [];
-let favsList = [];
+
+const savedFavs = JSON.parse(localStorage.getItem('myfavorites'));
+let favsList = savedFavs;
+if (savedFavs === null) {
+  favsList = [];
+}
+
+renderFavsList();
 
 // Funciones
 
@@ -48,6 +56,12 @@ function handleClick(event) {
     .then((response) => response.json())
     .then((data) => {
       searchList = data;
+      if (data.length === 0) {
+        searchListText.innerHTML =
+          'Uy, parece que no tenemos ninguna coincidencia :(';
+      } else {
+        searchListText.innerHTML = 'Aquí están tus coincidencias:';
+      }
       renderSearchList(searchList);
     });
 }
@@ -127,14 +141,16 @@ function renderFavsList() {
     deleteBtn.showId = item.show.id; // Para conseguir que el boton tenga el id del item y poder eliminarlo - stackoverflow.com.
 
     deleteBtn.addEventListener('click', removeFav);
+    resetBtn.addEventListener('click', removeAllFavs);
   }
 }
 
 // Funcion para quitar favoritos con el boton borrar
 
 function removeFav(event) {
+  event.preventDefault();
   // 1. Modificar el array de favoritos
-  const favId = event.currentTarget.showId; 
+  const favId = event.currentTarget.showId;
   //Utilizo la propiedad showId que he creado para poder saber el id del item.
 
   // 1.1 Saber a cual estoy haciendo click (id)
@@ -148,6 +164,17 @@ function removeFav(event) {
 
   // 3. Llamar a la funcion renderSearchList
   renderSearchList(searchList);
+
+  storeFavs();
+}
+
+// Funcion para eliminar TODOS los favoritos con el boton borrar todo.
+
+function removeAllFavs() {
+  favsList = [];
+  renderFavsList();
+  renderSearchList(searchList);
+  storeFavs();
 }
 
 // Funcion manejadora del evento click para series favoritas.
@@ -163,10 +190,16 @@ function clickFavs(event) {
   if (existingFav === undefined) {
     favsList.push(itemClicked);
     renderFavsList();
+    renderSearchList(searchList);
+    storeFavs();
   }
 
-  event.currentTarget.classList.add('show_card--fav');
-  //   renderSearchList(searchList);
+//   event.currentTarget.classList.add('show_card--fav'); lo sustituye esta funcion que he colocado dentro del if jusnto con el renderFavsList y StoreFavs: renderSearchList(searchList);
+}
+
+// Funcion para guardar y actualizar el localStorage
+function storeFavs() {
+  localStorage.setItem('myfavorites', JSON.stringify(favsList));
 }
 
 // Eventos
