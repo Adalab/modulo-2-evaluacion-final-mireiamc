@@ -1,124 +1,64 @@
-![Adalab](https://beta.adalab.es/resources/images/adalab-logo-155x61-bg-white.png)
+# Buscador de Series
 
-# Adalab web starter kit
+En este proyecto impremento un buscador de series utilizando HTML, SASS y JavaScript. El buscador hace uso de una API para obtener series que coincidan con lo que se escribe en el campo de búsqueda. Además, permite agregar y quitar series de una lista de favoritos.
 
-Ahoy! Este es nuestro Starter Kit creado en **node y gulp**. ¿Y qué es un Starter kit? Pues es una **plantilla de proyecto con funcionalidades preinstaladas y preconfiguradas**.
+Aquí tienes el enlace para probarla:
 
-Este Kit incluye un motor de plantillas HTML, el preprocesador SASS y un servidor local y muchas cosas más. El Kit nos ayuda a trabajar más cómodamente, nos automatiza tareas.
+http://beta.adalab.es/modulo-2-evaluacion-final-mireiamc/
 
-En el Kit hay 3 tipos de ficheros y carpetas:
+## Características
 
-- Los ficheros que están sueltos en la raíz del repositorio, como gulpfile.js, package.json... Son la configuración del proyecto y no necesitamos modificarlos.
-- La carpeta `src/`: son los ficheros de nuestra página web, como HTML, CSS, JS...
-- Las carpetas `public/` y `docs/`, que son generadas automáticamente cuando arrancamos el proyecto. El Kit lee los ficheros que hay dentro de `src/`, los procesa y los genera dentro de `public/` y `docs/`.
+- **Tecnologías utilizadas**:
+  - HTML
+  - SASS (preprocesador de CSS)
+  - JavaScript
 
-## Guía de inicio rápido
+## Detalles del Código
 
-> **NOTA:** Necesitas tener instalado [Node JS](https://nodejs.org/) para trabajar con este Starter Kit:
+### Variables
 
-### Pasos a seguir cada vez que queremos arrancar un proyecto desde cero:
+- `finderInput`: Se refiere al campo de entrada de texto utilizado para realizar búsquedas de series.
+- `finderBtn`: Es el botón de búsqueda.
+- `searchListUl`: Corresponde a la lista donde se mostrarán los resultados de la búsqueda.
+- `searchListText`: Es el elemento que muestra el texto de coincidencias.
+- `resetBtn`: El botón que permite reiniciar la lista de favoritos.
+- `searchList`: Una variable que almacena las series encontradas durante la búsqueda.
+- `favsList`: Una lista que contiene las series marcadas como favoritas.
 
-1. **Crea tu propio repositorio.**
-1. Descarga este **Starter kit desde GitHub**.
-   - No recomendamos que clones este repo ya que no podrás añadir commits.
-1. **Copia todos los ficheros** de este Starter kit en la carpeta raíz de tu repositorio.
-   - Recuerda que debes copiar **también los ficheros ocultos**.
-   - Si has decidido clonar este repo, no debes copiar la carpeta `.git`. Si lo haces estarás machacando tu propio repositorio.
-1. **Abre una terminal** en la carpeta raíz de tu repositorio.
-1. **Instala las dependencias** locales ejecutando en la terminal el comando:
+### Funciones Principales
 
-```bash
-npm install
-```
+1. `handleClick(event)`: Esta función maneja el evento click en el botón de búsqueda. Obtiene el valor ingresado por el usuario, construye una URL de la API y realiza la petición. Una vez que obtiene los datos, actualiza `searchList` y llama a `renderSearchList` para mostrar los resultados.
 
-### Pasos para arrancar el proyecto:
+2. `renderSearchList(searchList)`: Esta función se encarga de mostrar las series encontradas en la lista de resultados. Para cada serie, crea un elemento `li` que contiene una imagen, el título y un identificador. Además, verifica si la serie ya está marcada como favorita y le añade la clase correspondiente.
 
-Una vez hemos instalado las dependencias, vamos a arrancar el proyecto. **El proyecto hay que arrancarlo cada vez que te pongas a programar.** Para ello ejecuta el comando:
+3. `renderFavsList()`: Pinta la lista de series favoritas. Itera sobre `favsList` y para cada serie crea un elemento `li` que contiene una imagen, el título, un botón de eliminar y un identificador.
 
-```bash
-npm start
-```
+4. `removeFav(event)`: Esta función se activa cuando se hace click en el botón de eliminar una serie de favoritos. Primero, obtiene el identificador de la serie. Luego, busca el índice de esa serie en `favsList` y la elimina. Finalmente, llama a `renderFavsList` y `renderSearchList` para actualizar la visualización.
 
-Este comando:
+5. `removeAllFavs()`: Elimina todas las series de la lista de favoritos. Llama a `renderFavsList` y `renderSearchList` para actualizar la visualización.
 
-- **Abre una ventana de Chrome y muestra tu página web**, al igual que hace el plugin de VS Code Live Server (Go live).
-- También **observa** todos los ficheros que hay dentro de la carpeta `src/`, para que cada vez que modifiques un fichero **refresca tu página en Chrome**.
-- También **procesa los ficheros** HTML, SASS / CSS y JS y los **genera y guarda en la carpeta `public/`**. Por ejemplo:
-   - Convierte los ficheros SASS en CSS.
-   - Combina los diferentes ficheros de HTML y los agrupa en uno o varios ficheros HTML.
+6. `clickFavs(event)`: Esta función maneja el evento click en las series favoritas. Obtiene el identificador de la serie clickeada y verifica si ya está en la lista de favoritos. Si no está, la agrega; si ya está, la quita.
 
-Después de ejecutar `npm start` ya puedes empezar a editar todos los ficheros que están dentro de la carpeta `src/` y programar cómodamente.
+7. `storeFavs()`: Guarda el estado actual de la lista de favoritos en el `localStorage`.
 
-### Pasos para publicar el proyecto en GitHub Pages:
+## Instrucciones de Uso
 
-Para generar tu página para producción ejecuta el comando:
+1. Ingresa el nombre de una serie en el campo de búsqueda y presiona el botón de búsqueda.
 
-```bash
-npm run docs
-```
+2. Se mostrarán las coincidencias en la lista de resultados.
 
-Y a continuación:
+3. Haz clic en una serie para agregarla o quitarla de la lista de favoritos.
 
-1. Sube a tu repo la carpeta `docs/` que se te acaba de generar.
-1. Entra en la pestaña `settings` de tu repo.
-1. Y en el apartado de GitHub Pages activa la opción **master branch /docs folder**.
-1. Y ya estaría!!!
+4. Puedes eliminar una serie de la lista de favoritos haciendo clic en el botón "X" junto a su imagen.
 
-Además, los comandos:
+5. Para eliminar todas las series de la lista de favoritos, presiona el botón "Borrar todo".
 
-```bash
-npm run push-docs
-```
-o
+## Persistencia de Favoritos
 
-```bash
-npm run deploy
-```
+Los favoritos se guardan en el `localStorage` del navegador, lo que significa que se mantendrán incluso después de cerrar y volver a abrir la página.
 
-son un atajo que nos genera la versión de producción y hace push de la carpeta `docs/` del tirón. Te recomendamos ver el fichero `package.json` para aprender cómo funciona.
+## Notas
 
-## Flujo de archivos con Gulp
+- Si no hay coincidencias en la búsqueda, se mostrará un mensaje indicando que no se encontraron resultados.
 
-Estas tareas de Gulp producen el siguiente flujo de archivos:
-
-![Gulp flow](./gulp-flow.png)
-
-## `gulpfile.js` y `config.json`
-
-Nuestro **gulpfile.js** usa el fichero `config.json` de configuración con las rutas de los archivos a generar / observar.
-
-De esta manera separarmos las acciones que están en `gulpfile.js` de la configuración de las acciones que están en `config.json`.
-
-## Estructura de carpetas
-
-La estructura de carpetas tiene esta pinta:
-
-```
-src
- ├─ api // los ficheros de esta carpeta se copian en public/api/
- |  └─ data.json
- ├─ images
- |  └─ logo.jpg
- ├─ js // los ficheros de esta carpeta se concatenan en el fichero main.js y este se guarda en public/main.js
- |  ├─ main.js
- |  └─ events.js
- ├─ scss
- |  ├─ components
- |  ├─ core
- |  ├─ layout
- |  └─ pages
- └─ html
-    └─ partials
-```
-
-> **NOTA:** Los partials de HTML y SASS del proyecto son orientativos. Te recomendamos usar los que quieras, y borrar los que no uses.
-
-## Vídeotutoriales del Starter kit
-
-- [Qué es, trabajar con la versión de desarrollo y rutas relativas](https://www.youtube.com/watch?v=XwvhXvBijos)
-- [Migración de un proyecto, trabajar con la versión de producción y GitHub Pages](https://www.youtube.com/watch?v=qqGClcgt9Uc)
-- [Motor de plantillas](https://www.youtube.com/watch?v=4GwXOJ045Zg)
-
-## Falta algo?
-
-Echas de menos que el kit haga algo en concreto? Pidelo sin problema a través de las issues o si te animas a mejorarlo mándanos un PR :)
+- Si una serie no tiene imagen, se mostrará una imagen de relleno.

@@ -1,28 +1,3 @@
-// Aplicacion web de busqueda de series de TV que nos permite:
-
-//  - Estructura basica HTML y CSS con:
-//      1. Un input y un boton buscar. HECHO
-//      2. Lado izquierdo, donde apareceran las series favoritas HECHO
-//      3. Lado derecho, donde apareceran el listado de la busqueda. HECHO
-//      4. SI QUEDA TIEMPO: investigar para printar algunas series random como recomendacion.
-
-//  - Filtrar por palabra en el buscador y aparecen las series que coincidan de la API. HECHO
-//  - Pintar las series que coincidan con innerHTML o con DOM. HECHO
-//  - Tienen que mostrarse foto de la serie y titulo. OJOOO!!! Y si no hubiese foto, sustituirla por una foto de stock. HECHO
-//  - Marcar series como favoritas:
-//      1. Al hacer click en la serie, cambia el color de fondo y la fuente. HECHO
-//      2. Que aparezca en el apartado de la izquierda de series favoritas. Crear variable tipo array para almacenar series favoritas. HECHO
-//      3. Aunque la usuaria haga otra busqueda, debe serguir apareciendo a la izquierda el listado de series favoritas. HECHO
-//      3. BONUS: Quitar las series del apartado de favoritos y que ya no se vean con el fondo diferente. Mediante un icono de una X al lado de cada favorito. Se borra de    localStorage y del listado.
-//  - Almacenar el listado de favoritos en el localStorage para que al recargarse la pagina, se muestre el listado y no tenga que volver a hacer la peticion.
-
-// Paso a paso
-//  - Traer los elementos del intput y el boton del HTML al JS.
-//  - Recoger el valor del texto que introduce la usuaria en el campo de busqueda.
-//  - Crear el evento del boton buscar.
-//  - Hacer la peticion al servidor para que nos devuelva las series que coincidan en nombre con el valor del input que ha introducido la usuaria.
-//  - Printar en pantalla todas las series que coincidan con el valor del input.
-//  -
 
 'use strict';
 
@@ -81,9 +56,10 @@ function renderSearchList(searchList) {
     elementContainer.classList.add('show_card');
 
     const existingFav = favsList.find((fav) => item.show.id === fav.show.id);
+    //Devuelve undefined cuando no encuentra ningun resultado que coincida.
     if (existingFav !== undefined) {
       elementContainer.classList.add('show_card--fav');
-    }
+    }  
 
     const imgElement = document.createElement('img');
     if (item.show.image === null) {
@@ -115,6 +91,7 @@ function renderFavsList() {
     const liElement = document.createElement('li');
     liElement.setAttribute('id', item.show.id);
     ulFavs.appendChild(liElement);
+    liElement.classList.add('show_card__fav');
 
     const imgElement = document.createElement('img');
     if (item.show.image === null) {
@@ -134,14 +111,13 @@ function renderFavsList() {
     liElement.appendChild(h3Title);
 
     const deleteBtn = document.createElement('button');
-    const deleteBtnText = document.createTextNode('Borrar');
+    const deleteBtnText = document.createTextNode('X');
     deleteBtn.appendChild(deleteBtnText);
     liElement.appendChild(deleteBtn);
     deleteBtn.classList.add('delete-btn');
     deleteBtn.showId = item.show.id; // Para conseguir que el boton tenga el id del item y poder eliminarlo - stackoverflow.com.
 
     deleteBtn.addEventListener('click', removeFav);
-    resetBtn.addEventListener('click', removeAllFavs);
   }
 }
 
@@ -189,12 +165,15 @@ function clickFavs(event) {
   );
   if (existingFav === undefined) {
     favsList.push(itemClicked);
-    renderFavsList();
-    renderSearchList(searchList);
-    storeFavs();
+  } else {
+    const indexOfFav = favsList.indexOf(existingFav);
+    favsList.splice(indexOfFav, 1);
   }
 
-//   event.currentTarget.classList.add('show_card--fav'); lo sustituye esta funcion que he colocado dentro del if jusnto con el renderFavsList y StoreFavs: renderSearchList(searchList);
+  renderFavsList();
+  renderSearchList(searchList);
+  storeFavs();
+  //   event.currentTarget.classList.add('show_card--fav'); lo sustituye esta funcion que he colocado dentro del if jusnto con el renderFavsList y StoreFavs: renderSearchList(searchList);
 }
 
 // Funcion para guardar y actualizar el localStorage
@@ -205,3 +184,4 @@ function storeFavs() {
 // Eventos
 
 finderBtn.addEventListener('click', handleClick);
+resetBtn.addEventListener('click', removeAllFavs);
