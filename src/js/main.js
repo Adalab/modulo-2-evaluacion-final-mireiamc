@@ -18,7 +18,6 @@ let favsList = savedFavs;
 if (savedFavs === null) {
   favsList = [];
 }
-// Tuve que hacer la condicion del null porque si no, me daba el error de que el array (cuando haciamos el renderFavsList) con el que abria la pagina por primera vez, no era iterable.
 renderFavsList();
 
 // Funciones
@@ -38,22 +37,11 @@ function handleClick(event) {
       } else {
         searchListText.innerHTML = 'Aquí están tus coincidencias:';
       }
-      // Printa en el numero de resultados que nos da data.
-      //   numSearchResults.innerHTML = `Tienes ${data.length} resultados`;
 
       renderSearchList(searchList);
     });
 
-  //   // Tecnica: Evento para clicar encima de los resultados
-  //   numSearchResults.addEventListener('click', numberOfResults);
 }
-
-// Tecnica: funcion manejadora del evento de arriba para que printe en consola el nombre de las series.
-// function numberOfResults() {
-//   for (const item of searchList) {
-//     console.log(item.show.name);
-//   }
-// }
 
 // Funcion para pintar las series filtradas y condicion para sustituir la imagen si no tiene.
 
@@ -86,35 +74,6 @@ function renderSearchList(searchList) {
     h3Title.appendChild(textTitleH3);
     elementContainer.appendChild(h3Title);
 
-    // Elemento nuevo para la tecnica
-
-    // const h3Date = document.createElement('h3');
-    // const textDateH3 = document.createTextNode(
-    //   `Fecha de estreno: ${item.show.premiered}`
-    // );
-    // h3Date.appendChild(textDateH3);
-    // elementContainer.appendChild(h3Date);
-
-    // Entrevista tecnica: poner el idioma, si no hay idioma no poner nada y ademas si es en ingles ponerlo como recomendada.
-    // if (item.show.language !== null) {
-    //   const h3Lang = document.createElement('h3');
-    //   const textLangH3 = document.createTextNode(
-    //     `Idioma: ${item.show.language}`
-    //   );
-    //   h3Lang.appendChild(textLangH3);
-    //   elementContainer.appendChild(h3Lang);
-    // }
-
-    // if (
-    //   item.show.language === 'English' ||
-    //   item.show.language === 'Spanish' ||
-    //   item.show.language === 'Portuguese'
-    // ) {
-    //   const recomended = document.createElement('p');
-    //   const textRecomended = document.createTextNode(`Serie recomendada`);
-    //   recomended.appendChild(textRecomended);
-    //   elementContainer.appendChild(recomended);
-    // }
     //Busco si hay algun item con un id en favsList que me coincida con aluguno de los id de los items de la busqueda. En el caso de que coincida alguno, lel añado las clases que haran que me cambie de color la letra y el fondo de la tarjeta.
     const existingFav = favsList.find((fav) => item.show.id === fav.show.id);
     //Devuelve undefined cuando no encuentra ningun resultado que coincida.
@@ -160,20 +119,12 @@ function renderFavsList() {
     deleteBtn.appendChild(deleteBtnText);
     liElement.appendChild(deleteBtn);
     deleteBtn.classList.add('delete-btn');
-    deleteBtn.showId = item.show.id; // Para conseguir que el boton tenga el id del item y poder eliminarlo - stackoverflow.com. No utilizo el id pq no puedo tener el mismo id en dos elementos diferentes del HTML, no puedo tener un boton con 123 y un li con un id 123.
+    deleteBtn.showId = item.show.id; 
 
-    // logBtn.addEventListener('click', logFavs); //Evento boton log entrevista tecnica
     deleteBtn.addEventListener('click', removeFav);
   }
 }
-// funcion prueba entrevista tecnica
 
-// function logFavs() {
-//   for (const item of favsList) {
-//     console.log(`Serie favorita: ${item.show.name}`);
-//   }
-//   console.log(favsList.length);
-// }
 // Funcion para quitar favoritos con el boton borrar
 
 function removeFav(event) {
