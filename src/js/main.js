@@ -72,6 +72,12 @@ function renderSearchList(searchList) {
     h3Title.appendChild(textTitleH3);
     elementContainer.appendChild(h3Title);
 
+    const h3Date = document.createElement('h3');
+    const textDateH3 = document.createTextNode(item.show.schedule.days);
+    h3Date.appendChild(textDateH3);
+    elementContainer.appendChild(h3Date);
+
+
     const existingFav = favsList.find((fav) => item.show.id === fav.show.id);
     //Devuelve undefined cuando no encuentra ningun resultado que coincida.
     if (existingFav !== undefined) {
@@ -164,6 +170,9 @@ function clickFavs(event) {
   const existingFav = favsList.find(
     (item) => itemClicked.show.id === item.show.id
   );
+
+  console.log(itemClicked.show.name);
+
   if (existingFav === undefined) {
     favsList.push(itemClicked);
   } else {
